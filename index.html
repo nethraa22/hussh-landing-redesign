@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hussh | Concept redesign</title>
+<meta name="description" content="A concept redesign of the hussh landing page. Private, calm and clear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0A0F1A; --night2:#0F1726; --slate:#16213A; --card:#18233A; --line:#2A3853;
+  --blue:#4F7CC4; --blue-soft:rgba(79,124,196,.16);
+  --text:#EAF0F8; --muted:#A9B7CC; --faint:#8EA0BB;
+  --gold:#DDB75A; --gold-d:#C9A24A; --gold-soft:rgba(221,183,90,.13); --ink:#14110A;
+  --stripe:repeating-linear-gradient(135deg,#0F1726 0 9px,#14203A 9px 18px);
+  --head:'Bricolage Grotesque',system-ui,sans-serif; --body:'Instrument Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--text);background:var(--night);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--head);line-height:1.08;letter-spacing:-.02em;color:var(--text)}
+h1{font-size:clamp(2.5rem,5.6vw,4.1rem);font-weight:700}
+h2{font-size:clamp(1.75rem,3.3vw,2.6rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:600}
+p.lead{font-size:1.15rem;color:var(--muted);max-width:50ch}
+.btn{display:inline-block;text-decoration:none;font-weight:600;padding:14px 26px;border-radius:999px;transition:background .2s,border-color .2s,color .2s;text-align:center}
+.btn-primary{background:var(--gold);color:var(--ink)}
+.btn-primary:hover{background:var(--gold-d)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--blue);color:#fff}
+.note{font-size:.9rem;color:var(--muted)}
+
+.ribbon{background:var(--slate);color:#C9D5E6;font-size:.82rem;text-align:center;padding:8px 16px;border-bottom:1px solid var(--line)}
+
+header{position:sticky;top:0;z-index:30;background:rgba(10,15,26,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:700;font-size:1.4rem;text-decoration:none}
+.logo .mark{width:32px;height:32px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:1.05rem}
+.links{display:flex;gap:28px;list-style:none;font-weight:500;font-size:.98rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:18px}
+.signin{font-weight:600;font-size:.95rem;text-decoration:none;color:var(--muted)}
+.signin:hover{color:#fff}
+.nav-cta{padding:10px 20px;font-size:.95rem}
+.menu-btn{display:none;font:inherit;font-weight:600;font-size:.92rem;background:transparent;color:var(--text);border:1.5px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+
+/* hero */
+.hero{padding:72px 0 92px;background:
+  radial-gradient(55% 60% at 80% 35%,rgba(79,124,196,.22),transparent 70%),
+  radial-gradient(40% 40% at 90% 80%,rgba(221,183,90,.07),transparent 70%),
+  var(--night)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero h1{margin-bottom:22px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0 16px}
+.fine{font-size:.88rem;color:var(--muted);max-width:50ch}
+.works{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.88rem;color:var(--muted)}
+.works span.c{border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--text);background:var(--night2)}
+
+/* interactive brief */
+.device{position:relative;background:linear-gradient(170deg,#1D2A47,var(--card));border:1.5px solid rgba(221,183,90,.55);border-radius:30px;padding:30px 22px 22px;box-shadow:0 0 0 8px var(--gold-soft),0 30px 80px rgba(0,0,0,.6)}
+.device-tag{position:absolute;top:-15px;left:22px;background:var(--gold);color:var(--ink);font-size:.8rem;font-weight:600;padding:5px 14px;border-radius:999px}
+.brief-title{font-family:var(--head);font-weight:700;font-size:1.35rem;margin:4px 0 2px}
+.brief-sub{font-size:.9rem;color:var(--muted);margin-bottom:14px}
+.switches{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.sw{font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:var(--night2);border:1.5px solid var(--line);border-radius:999px;padding:7px 14px 7px 10px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.sw i{width:26px;height:15px;border-radius:99px;background:#33425F;position:relative;transition:background .2s}
+.sw i::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#C7D2E4;transition:transform .2s}
+.sw[aria-checked="true"]{color:var(--text);border-color:rgba(221,183,90,.6);background:var(--gold-soft)}
+.sw[aria-checked="true"] i{background:var(--gold)}
+.sw[aria-checked="true"] i::after{transform:translateX(11px);background:var(--ink)}
+.item{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--night2);margin-bottom:10px;border:1px solid var(--line);min-height:78px;transition:border-color .3s,background .3s}
+.dot{flex:none;width:34px;height:34px;border-radius:10px;background:var(--blue-soft);color:#A9C4EE;display:grid;place-items:center;font-size:.85rem;font-weight:600}
+.item b{display:block;font-size:.8rem;color:var(--muted);font-weight:600}
+.item span{font-size:.95rem;line-height:1.4;display:block}
+.item.sealed{background:var(--stripe)}
+.item.sealed span{color:var(--faint);font-style:italic}
+.item.sealed .dot{background:#1C2943;color:var(--faint)}
+.item.live{border-color:rgba(221,183,90,.35)}
+.foot-lock{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted);margin-top:14px}
+.foot-lock i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;flex:none}
+
+/* facts strip */
+.strip{padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--night2)}
+.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;text-align:center}
+.strip-grid b{font-family:var(--head);font-size:1.15rem;display:block}
+.strip-grid p{color:var(--muted);font-size:.95rem}
+
+section{padding:92px 0}
+.sec-head{max-width:660px;margin-bottom:44px}
+.sec-head p{margin-top:14px;color:var(--muted);font-size:1.1rem}
+
+/* redaction */
+
+/* what it does */
+.does{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.do{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.do:nth-child(2){border-radius:24px 24px 24px 6px}
+.do:nth-child(3){border-radius:6px 24px 24px 24px}
+.do p{color:var(--muted);font-size:.98rem}
+.ex b{color:var(--gold);font-weight:600}
+.ex{margin-top:auto;background:var(--night2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:12px 14px;font-size:.93rem}
+
+/* difference */
+.diff{background:linear-gradient(180deg,var(--night2),var(--slate) 160%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.box{border-radius:26px;padding:30px}
+.box.them{border:2px dashed #3E4F6F;background:transparent}
+.box.us{border:2px solid rgba(221,183,90,.65);background:var(--card);box-shadow:0 0 0 8px var(--gold-soft)}
+.box h3{margin-bottom:4px}
+.box small{display:block;color:var(--muted);margin-bottom:14px;font-size:.92rem}
+.box ul{list-style:none}
+.box li{padding:14px 0;border-top:1px solid var(--line)}
+.box li b{display:block;font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:2px}
+.box.us li b{color:var(--gold)}
+.box.them li{color:var(--muted)}
+.vault{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.vault span{font-size:.85rem;font-weight:600;padding:7px 14px;border-radius:999px}
+.box.them .vault span{border:1.5px dashed #5A6C8E;color:var(--muted)}
+.box.us .vault span{background:var(--stripe);border:1px solid rgba(221,183,90,.5);color:var(--gold)}
+.vault-note{font-size:.82rem;color:var(--faint);margin-top:8px}
+.after{margin-top:26px;padding:20px 24px;border-radius:18px;background:var(--blue-soft);border:1px solid rgba(79,124,196,.35);color:#DCE6F7}
+
+/* products */
+.prod{display:grid;grid-template-columns:1.25fr 1fr;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:34px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.card.main{border-color:rgba(221,183,90,.55);background:linear-gradient(160deg,#1F2C4A,var(--card))}
+.card h3{font-size:1.5rem;margin-bottom:8px}
+.card p{color:var(--muted)}
+.card a.more{display:inline-block;margin-top:16px;font-weight:600;color:var(--gold);text-decoration:underline;text-underline-offset:4px}
+.art{display:flex;justify-content:center;align-items:flex-end}
+.art svg{width:100%;max-width:300px;height:auto}
+.card.main .art svg{max-width:210px}
+.soon{display:flex;gap:20px;align-items:center;padding:20px 26px;border-radius:22px;border:1.5px dashed #3E4F6F;grid-column:1/-1;color:var(--muted)}
+.soon b{color:var(--text)}
+.soon svg{flex:none;width:76px;height:76px}
+.badge{background:var(--blue-soft);color:#C3D5F4;border:1px solid rgba(79,124,196,.5);font-weight:600;font-size:.8rem;padding:4px 12px;border-radius:999px;white-space:nowrap;display:inline-block;margin-bottom:6px}
+
+/* faq */
+.faq-wrap{background:var(--night2);border-top:1px solid var(--line)}
+.faq{max-width:760px}
+details{border-top:1px solid var(--line);padding:20px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--head);font-size:1.15rem;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--gold);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:12px;color:var(--muted)}
+
+/* final */
+.final{background:radial-gradient(60% 120% at 50% 100%,rgba(79,124,196,.22),transparent 70%),var(--night);border-top:1px solid var(--line);text-align:center;padding:96px 0}
+.final h2{margin-bottom:14px}
+.final p{color:var(--muted);margin:0 auto 28px;max-width:52ch}
+.seal-band{height:10px;background:var(--stripe);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+footer{padding:56px 0 36px;font-size:.95rem;background:var(--night2)}
+.fgrid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:28px}
+footer h4{font-family:var(--head);font-size:1rem;margin-bottom:12px}
+footer ul{list-style:none}
+footer li{margin-bottom:8px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:#fff}
+.biz{margin-top:36px;padding:18px 22px;background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.legal{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* sticky mobile CTA */
+.sticky-cta{display:none}
+
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .links{display:none}
+  .links.open{display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;gap:6px;background:var(--night2);padding:14px 24px 20px;border-bottom:1px solid var(--line)}
+  .links.open a{display:block;padding:10px 0;font-size:1.05rem}
+  .nav-cta{display:none}
+  .nav-right{gap:12px}
+  .hero{padding:40px 0 64px}
+  .hero-grid,.prod,.compare{grid-template-columns:1fr;gap:36px}
+  .hero .actions{margin:22px 0 14px}
+  .hero .actions .btn-ghost{display:none}
+  p.lead{font-size:1.05rem}
+  .does,.strip-grid{grid-template-columns:1fr}
+  .strip-grid{text-align:left;gap:14px}
+  .fgrid{grid-template-columns:1fr 1fr}
+  section{padding:64px 0}
+  .final{padding:72px 0 120px}
+  body{padding-bottom:84px}
+  .sticky-cta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(10,15,26,0),rgba(10,15,26,.96) 35%);transition:transform .3s,opacity .3s}
+  .sticky-cta .btn{display:block;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+  .sticky-cta.hide{transform:translateY(120%);opacity:0;pointer-events:none}
+}
+@media (max-width:520px){
+  .wrap{padding:0 18px}
+  .signin{font-size:.9rem}
+  .card{padding:26px}
+  .box{padding:24px}
+  .soon{flex-direction:column;align-items:flex-start}
+  .fgrid{grid-template-columns:1fr}
+  .legal{flex-direction:column}
+}
+@media (prefers-reduced-motion:no-preference){
+  .device{animation:settle .9s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes settle{from{transform:translateY(18px);opacity:.4}to{transform:none;opacity:1}}
+  .item.live{animation:reveal .5s ease both}
+  @keyframes reveal{from{opacity:.3}to{opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="ribbon">Concept redesign of the hussh landing page by Nethra Alluri. Not the live site.</div>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="logo" href="#top"><span class="mark" aria-hidden="true">🤫</span>hussh</a>
+      <ul class="links" id="menu">
+        <li><a href="#does">What it does</a></li>
+        <li><a href="#private">Privacy</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#business">For business</a></li>
+        <li><a href="#company">Company</a></li>
+      </ul>
+      <div class="nav-right">
+        <a class="signin" href="#get">Sign in</a>
+        <a class="btn btn-primary nav-cta" href="#get">Get Agent One free</a>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Keep your life in order. Keep it to yourself.</h1>
+      <p class="lead">Agent One is a private AI assistant that runs on your own device. It checks your calendar and email, then tells you each morning what needs your attention.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#get">Get Agent One free</a>
+        <a class="btn btn-ghost" href="#does">See what it does</a>
+      </div>
+      <p class="fine">Signing in with Google or Apple only creates your account. What you connect stays on your device.</p>
+      <div class="works">Works on <span class="c">Your phone</span><span class="c">Your computer</span> Now available in the U.S.</div>
+    </div>
+
+    <div>
+      <div class="device" aria-label="Interactive preview of Agent One's morning brief">
+        <span class="device-tag">Stays on your device</span>
+        <div class="brief-title">Tuesday morning</div>
+        <div class="brief-sub">Try it. Choose what Agent One can see.</div>
+        <div class="switches" role="group" aria-label="Choose what to connect">
+          <button class="sw" role="switch" aria-checked="true" data-key="calendar"><i></i>Calendar</button>
+          <button class="sw" role="switch" aria-checked="true" data-key="email"><i></i>Email</button>
+          <button class="sw" role="switch" aria-checked="false" data-key="money"><i></i>Money</button>
+        </div>
+        <div class="item" data-key="calendar" data-label="Calendar" data-text="Your 3:00 call runs into school pickup at 3:30."><div class="dot">▦</div><div><b>Calendar</b><span></span></div></div>
+        <div class="item" data-key="email" data-label="Email" data-text="Found the receipt for your new tires."><div class="dot">✉</div><div><b>Email</b><span></span></div></div>
+        <div class="item" data-key="money" data-label="Money" data-text="A $14.99 charge from a service you cancelled in May."><div class="dot">$</div><div><b>Money</b><span></span></div></div>
+        <div class="foot-lock"><i></i><span id="count">Example screen. Everything here stays on your device.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-grid">
+      <div><b>Free to use</b><p>No card needed to start</p></div>
+      <div><b>Now available in the U.S.</b><p>More places to come</p></div>
+      <div><b>About two minutes</b><p>From sign in to your first brief</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="does">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The small things that slip, caught for you</h2>
+      <p>Agent One reads only what you connect, then brings up what is worth your time.</p>
+    </div>
+    <div class="does">
+      <div class="do">
+        <h3>No more money surprises</h3>
+        <p>Spots charges you forgot about and bills coming due.</p>
+        <div class="ex">Your electric bill is <b>$214</b>, higher than usual this month.</div>
+      </div>
+      <div class="do">
+        <h3>Finds things in your own inbox</h3>
+        <p>Receipts, tickets and confirmations, without the searching.</p>
+        <div class="ex">Your flight to <b>Denver</b> is confirmed for Friday.</div>
+      </div>
+      <div class="do">
+        <h3>Keeps your day from colliding</h3>
+        <p>Warns you when plans overlap before it becomes a problem.</p>
+        <div class="ex">Dentist and school pickup are both at <b>3:30</b>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diff" id="private">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Your life stays on your device. Even when a bigger AI helps.</h2>
+      <p>Many assistants keep your information on their servers. Agent One keeps it with you, and when it needs outside help, it shares only the question.</p>
+    </div>
+    <div class="compare">
+      <div class="box them">
+        <h3>Many assistants</h3>
+        <small>Your information lives with them</small>
+        <ul>
+          <li><b>Where it lives</b>Often on company servers</li>
+          <li><b>What they learn from</b>Often what you share</li>
+          <li><b>When they ask a bigger AI</b>Your context may travel along</li>
+        </ul>
+        <div class="vault" aria-hidden="true"><span>Messages</span><span>Photos</span><span>Files</span><span>Contacts</span></div>
+        <p class="vault-note">Open to the company</p>
+      </div>
+      <div class="box us">
+        <h3>Agent One</h3>
+        <small>Your information stays with you</small>
+        <ul>
+          <li><b>Where it lives</b>On your own device</li>
+          <li><b>What it learns from</b>Only what you choose to connect</li>
+          <li><b>When it asks a bigger AI</b>It sends only the question</li>
+        </ul>
+        <div class="vault" aria-hidden="true"><span>Messages</span><span>Photos</span><span>Files</span><span>Contacts</span></div>
+        <p class="vault-note">Sealed on your device</p>
+      </div>
+    </div>
+    <p class="after">Never your name, your contacts or your files. Only the question, and only when you ask.</p>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Start with the app. Add hardware if you want.</h2>
+    </div>
+    <div class="prod">
+      <div class="card main" id="agent">
+        <div>
+          <h3>Agent One</h3>
+          <p>Your private assistant. It keeps track of your schedule and bills, and only sees what you choose to connect. Free to use.</p>
+          <a class="more" href="#get">Get Agent One free</a>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 210 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="6" width="150" height="238" rx="26" fill="#0F1726" stroke="#DDB75A" stroke-width="2.5"/>
+            <rect x="82" y="16" width="46" height="9" rx="4.5" fill="#27354F"/>
+            <rect x="46" y="44" width="70" height="10" rx="5" fill="#EAF0F8" opacity=".9"/>
+            <rect x="46" y="60" width="44" height="7" rx="3.5" fill="#A9B7CC" opacity=".6"/>
+            <g>
+              <rect x="44" y="84" width="122" height="44" rx="12" fill="#18233A" stroke="#2A3853"/>
+              <rect x="54" y="95" width="22" height="22" rx="7" fill="#4F7CC4" opacity=".35"/>
+              <rect x="86" y="97" width="66" height="7" rx="3.5" fill="#EAF0F8" opacity=".8"/>
+              <rect x="86" y="110" width="44" height="6" rx="3" fill="#A9B7CC" opacity=".5"/>
+              <rect x="44" y="138" width="122" height="44" rx="12" fill="#18233A" stroke="#2A3853"/>
+              <rect x="54" y="149" width="22" height="22" rx="7" fill="#4F7CC4" opacity=".35"/>
+              <rect x="86" y="151" width="60" height="7" rx="3.5" fill="#EAF0F8" opacity=".8"/>
+              <rect x="86" y="164" width="38" height="6" rx="3" fill="#A9B7CC" opacity=".5"/>
+              <rect x="44" y="192" width="122" height="38" rx="12" fill="#14203A" stroke="#DDB75A" stroke-opacity=".5" stroke-dasharray="4 4"/>
+              <rect x="86" y="206" width="56" height="7" rx="3.5" fill="#5A6C8E"/>
+              <circle cx="65" cy="211" r="9" fill="#DDB75A"/>
+              <path d="M61 211v-3a4 4 0 018 0v3" stroke="#14110A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <rect x="60" y="211" width="10" height="7" rx="2" fill="#14110A"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          <h3>Puppy One</h3>
+          <p>A laptop that comes with Agent One already installed. Apple Silicon Mac, Dell or Acer. Your information stays on your machine.</p>
+          <a class="more" href="#products">Explore Puppy One</a>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 300 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="50" y="10" width="200" height="130" rx="12" fill="#0F1726" stroke="#4F7CC4" stroke-width="2.5"/>
+            <rect x="62" y="22" width="176" height="106" rx="6" fill="#14203A"/>
+            <rect x="76" y="40" width="90" height="9" rx="4.5" fill="#EAF0F8" opacity=".85"/>
+            <rect x="76" y="58" width="130" height="8" rx="4" fill="#3A4B6A"/>
+            <rect x="76" y="74" width="110" height="8" rx="4" fill="#3A4B6A"/>
+            <rect x="76" y="90" width="120" height="8" rx="4" fill="#3A4B6A"/>
+            <circle cx="214" cy="106" r="13" fill="#DDB75A"/>
+            <rect x="208" y="105" width="12" height="9" rx="2" fill="#14110A"/>
+            <path d="M210 105v-3a4 4 0 018 0v3" stroke="#14110A" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M20 150h260l-14 24a8 8 0 01-7 4H41a8 8 0 01-7-4z" fill="#18233A" stroke="#4F7CC4" stroke-width="2.5"/>
+            <rect x="122" y="152" width="56" height="6" rx="3" fill="#27354F"/>
+          </svg>
+        </div>
+      </div>
+      <div class="soon">
+        <svg viewBox="0 0 76 76" fill="none" aria-hidden="true">
+          <path d="M26 6c0 8 4 12 12 12s12-4 12-12" stroke="#4F7CC4" stroke-width="3" stroke-linecap="round"/>
+          <rect x="22" y="24" width="32" height="40" rx="12" fill="#18233A" stroke="#DDB75A" stroke-width="2.5"/>
+          <circle cx="38" cy="40" r="7" fill="#DDB75A" opacity=".9"/>
+          <rect x="31" y="52" width="14" height="4" rx="2" fill="#3A4B6A"/>
+        </svg>
+        <div><span class="badge">Coming soon</span><br><b>Tag One</b> is a small wearable for the people you look out for. It shares location only when they agree, and alerts your trusted circle when they need help.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-wrap" id="company">
+  <div class="wrap">
+    <div class="sec-head"><h2>Questions people ask first</h2></div>
+    <div class="faq">
+      <details><summary>Is Agent One really free?</summary><p>Yes. Agent One is free to use. Placeholder: add one honest line on how hussh sustains itself.</p></details>
+      <details><summary>Why do I sign in with Google or Apple?</summary><p>Signing in only creates your account and lets you connect your own email and calendar. Placeholder: confirm with the team exactly what the sign in shares.</p></details>
+      <details><summary>Can anyone see my bank information?</summary><p>No. If you choose to connect money tracking, those details are read on your device and are not sent to hussh or to other companies. You can disconnect at any time.</p></details>
+      <details><summary>Is it available outside the U.S.?</summary><p>Agent One is now available in the U.S. Placeholder: add a waitlist for other countries.</p></details>
+    </div>
+  </div>
+</section>
+
+<div class="seal-band" aria-hidden="true"></div>
+<div class="final" id="get">
+  <div class="wrap">
+    <h2>Your first brief is about two minutes away.</h2>
+    <p>Sign in, choose what to connect, and wake up tomorrow to a short list of what matters. Now available in the U.S.</p>
+    <a class="btn btn-primary" href="#top">Get Agent One free</a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top"><span class="mark" aria-hidden="true">🤫</span>hussh</a>
+        <p class="note" style="margin-top:12px;max-width:30ch">Private AI that lives on your own hardware.</p>
+      </div>
+      <div><h4>Products</h4><ul><li><a href="#products">Agent One</a></li><li><a href="#products">Puppy One</a></li><li><a href="#products">Tag One</a></li><li><a href="#products">The One Card</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="#does">What it does</a></li><li><a href="#private">Privacy</a></li><li><a href="#company">Data marketplace</a></li><li><a href="#company">Blog and guide</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#company">About</a></li><li><a href="#company">Team</a></li><li><a href="#company">Careers</a></li><li><a href="#company">Contact</a></li></ul></div>
+      <div><h4>Trust</h4><ul><li><a href="#private">Privacy policy</a></li><li><a href="#private">Your data rights</a></li><li><a href="#private">Accessibility</a></li><li><a href="#private">Terms</a></li></ul></div>
+    </div>
+    <div class="biz" id="business">
+      <span><b>Business, advisor or developer?</b> Tools for teams are built separately.</span>
+      <a class="btn btn-ghost nav-cta" style="display:inline-block" href="#business">Go to hussh for business</a>
+    </div>
+    <div class="legal">
+      <span>© 2026 Hushh Technologies Corporation. Kirkland, WA.</span>
+      <span>Privacy choices live in the privacy center.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky"><a class="btn btn-primary" href="#get">Get Agent One free</a></div>
+
+<script>
+(function(){
+  /* brief demo */
+  var sw=document.querySelectorAll('.sw'),items=document.querySelectorAll('.item'),count=document.getElementById('count');
+  function render(){
+    var on=0;
+    sw.forEach(function(b){
+      var key=b.dataset.key,live=b.getAttribute('aria-checked')==='true';
+      if(live)on++;
+      items.forEach(function(it){
+        if(it.dataset.key!==key)return;
+        var s=it.querySelector('span');
+        it.classList.toggle('sealed',!live);
+        it.classList.toggle('live',live);
+        s.textContent=live?it.dataset.text:'Sealed. Connect '+it.dataset.label+' to see this.';
+      });
+    });
+    count.textContent=on+' of 3 connected. Everything here stays on your device.';
+  }
+  sw.forEach(function(b){
+    b.addEventListener('click',function(){
+      b.setAttribute('aria-checked',b.getAttribute('aria-checked')==='true'?'false':'true');
+      render();
+    });
+  });
+  render();
+
+  /* mobile menu */
+  var btn=document.getElementById('menuBtn'),menu=document.getElementById('menu');
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+    btn.textContent=open?'Close':'Menu';
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='Menu'});
+  });
+
+  /* hide sticky button when the final call to action is on screen */
+  var sticky=document.getElementById('sticky'),target=document.getElementById('get');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){sticky.classList.toggle('hide',e.isIntersecting)})},{threshold:.25}).observe(target);
+  }
+})();
+</script>
+</body>
+</html>
